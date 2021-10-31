@@ -15,10 +15,7 @@
         </activity>
         <activity
             android:name=".Ch3Ex1Activity"
-            android:label="@string/ex1"></activity>
-        <activity
-            android:name=".Ch3Ex2Activity"
-            android:label="@string/ex2">
+            android:label="@string/ex1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,8 +23,13 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Ch3Ex2Activity"
+            android:label="@string/ex2">
+        </activity>
+        <activity
             android:name=".Ch3Ex3Activity"
-            android:label="@string/ex3"></activity>
+            android:label="@string/ex3">
+        </activity>
     </application>
 
 </manifest>

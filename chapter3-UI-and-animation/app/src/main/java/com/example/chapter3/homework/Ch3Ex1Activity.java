@@ -1,7 +1,10 @@
 package com.example.chapter3.homework;
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
@@ -39,11 +42,21 @@ public class Ch3Ex1Activity extends AppCompatActivity {
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(SeekBar seekBar, final int progress, boolean fromUser) {
                 // TODO ex1-2: 这里应该调用哪个函数呢
                 // 提示1：可以参考 https://airbnb.io/lottie/#/android?id=custom-animators
                 // 提示2：SeekBar 的文档可以把鼠标放在 OnProgressChanged 中间，并点击 F1 查看，
                 // 或者到官网查询 https://developer.android.google.cn/reference/android/widget/SeekBar.OnSeekBarChangeListener.html#onProgressChanged(android.widget.SeekBar,%20int,%20boolean
+
+                ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f);
+//                Log.d("DEBUG", String.valueOf(progress));
+                animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        animationView.setProgress(progress/100f);
+                    }
+                });
+                animator.start();
             }
 
             @Override
