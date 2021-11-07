@@ -49,9 +49,9 @@ class ClockView @JvmOverloads constructor(
     private var secondPointerLength = 0f
 
     private var resultWidth = 0
-    private  var centerX: Int = 0
-    private  var centerY: Int = 0
-    private  var radius: Int = 0
+    private var centerX: Int = 0
+    private var centerY: Int = 0
+    private var radius: Int = 0
 
     private var degreesColor = 0
 
@@ -95,6 +95,7 @@ class ClockView @JvmOverloads constructor(
         drawNeedles(canvas)
 
         // todo 1: 每一秒刷新一次，让指针动起来
+
     }
 
     private fun drawDegrees(canvas: Canvas) {
@@ -154,7 +155,8 @@ class ClockView @JvmOverloads constructor(
         drawPointer(canvas, POINTER_TYPE_SECOND, nowSeconds)
         // 画分针
         // todo 2: 画分针
-
+        val partMinute = nowSeconds / 60
+        drawPointer(canvas, POINTER_TYPE_MINUTES, nowMinutes + partMinute)
         // 画时针
         val part = nowMinutes / 12
         drawPointer(canvas, POINTER_TYPE_HOURS, 5 * nowHours + part)
@@ -172,6 +174,9 @@ class ClockView @JvmOverloads constructor(
                 pointerHeadXY = getPointerHeadXY(hourPointerLength, degree)
             }
             POINTER_TYPE_MINUTES -> {
+                degree = value * UNIT_DEGREE
+                needlePaint.color = Color.BLUE
+                pointerHeadXY = getPointerHeadXY(minutePointerLength, degree)
             }
             POINTER_TYPE_SECOND -> {
                 degree = value * UNIT_DEGREE

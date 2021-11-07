@@ -4,7 +4,26 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/bg_clock">
+
+    <TextView
+        android:id="@+id/number_clock"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/clock"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="30sp"
+        />
 
     <me.adswt518.clock.ClockView
         android:id="@+id/clock"
@@ -20,6 +39,6 @@
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/number_clock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
