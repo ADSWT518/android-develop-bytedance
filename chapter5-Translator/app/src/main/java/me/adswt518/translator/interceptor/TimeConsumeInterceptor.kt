@@ -10,7 +10,7 @@ class TimeConsumeInterceptor : Interceptor {
         val resp = chain.proceed(chain.request())
         val endTime = System.currentTimeMillis()
         val url = chain.request().url.toString()
-        Log.i("TimeConsumeInterceptor", "request:$url cost time ${endTime - startTime}")
+        Log.i("TimeConsumeInterceptor", "request: $url, cost time ${endTime - startTime}ms")
         return resp
     }
 }

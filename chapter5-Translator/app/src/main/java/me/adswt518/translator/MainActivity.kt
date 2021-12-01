@@ -2,13 +2,14 @@ package me.adswt518.translator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
+import android.os.Handler
+import android.os.Looper
+import android.os.Message
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.google.gson.GsonBuilder
-import me.adswt518.translator.api.Trans
 import me.adswt518.translator.api.YoudaoBean
 import me.adswt518.translator.interceptor.TimeConsumeInterceptor
 import okhttp3.*
@@ -22,10 +23,12 @@ class MainActivity : AppCompatActivity() {
     val okhttpListener = object : EventListener() {
         override fun dnsStart(call: Call, domainName: String) {
             super.dnsStart(call, domainName)
+            Log.i("Translator", "Dns Search: $domainName")
         }
 
         override fun responseBodyStart(call: Call) {
             super.responseBodyStart(call)
+            Log.i("Translator", "Response Start")
         }
     }
 
@@ -36,6 +39,20 @@ class MainActivity : AppCompatActivity() {
 
     val gson = GsonBuilder().create()
 
+    companion object {
+        const val STATUS_FINISH_TRANSLATION = 0
+        const val RESULT = "result"
+    }
+
+    val handler: Handler = Handler(Looper.getMainLooper()) { msg ->
+        when (msg.what) {
+            STATUS_FINISH_TRANSLATION -> {
+                outputText?.text = "${msg.data[RESULT]}"
+            }
+        }
+        true
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -45,7 +62,8 @@ class MainActivity : AppCompatActivity() {
 
         requestBtn?.setOnClickListener {
             outputText?.text = ""
-            click(inputText?.text.toString())
+            val translationThread = TranslationThread()
+            translationThread.start()
         }
     }
 
@@ -59,8 +77,8 @@ class MainActivity : AppCompatActivity() {
 
     fun click(text: String) {
         val url = "https://dict.youdao.com/jsonapi?q=$text"
-        request(url, object : Callback{
-            override fun onFailure(call : Call, e : IOException){
+        request(url, object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
                 outputText?.text = e.message
             }
 
@@ -69,13 +87,29 @@ class MainActivity : AppCompatActivity() {
                 val youdaoBean = gson.fromJson(bodyString, YoudaoBean::class.java)
                 val tranList = youdaoBean.web_trans.web_translation[0].trans
                 println(tranList)
-                var output : String ?= null
-                for (trans in tranList){
-                    output += (trans.value + ";")
+                var output: String? = ""
+                for (trans in tranList) {
+                    output += (trans.value + "；")
                 }
-                outputText?.text = output
+                output = output?.substring(0, output?.length - 1)
+                val msg = Message.obtain()
+                msg.what = STATUS_FINISH_TRANSLATION
+                msg.data = Bundle().apply {
+                    putString(RESULT, output)
+                }
+                handler.sendMessage(msg)
             }
         })
     }
 
+    inner class TranslationThread : Thread() {
+        override fun run() {
+            super.run()
+            transition()
+        }
+
+        private fun transition() {
+            click(inputText?.text.toString())
+        }
+    }
 }
