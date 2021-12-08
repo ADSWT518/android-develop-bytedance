@@ -30,7 +30,7 @@ val dogMap = mutableMapOf<Int, Triple<Pair<Int, String>, Triple<Int, Boolean, St
     ),
     6 to Triple(
         Pair(R.drawable.shiba, "Scooter1"),
-        Triple(5, false, "Shiba"),
+        Triple(1, false, "Shiba"),
         "The Shiba Inu is a breed of hunting dog from Japan. A small-to-medium breed, it is the smallest of the six original and distinct spitz breeds of dog native to Japan."
     ),
     7 to Triple(

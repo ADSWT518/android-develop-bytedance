@@ -16,6 +16,10 @@ class DogRelativeLayoutHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
         itemView.findViewById<ImageView>(R.id.photo).setImageResource(dogInfoPair.first.first)
         itemView.findViewById<TextView>(R.id.name).text = dogInfoPair.first.second
         itemView.findViewById<TextView>(R.id.info).text =
-            "Age: ${dogInfoPair.second.first} years, Gender: ${dogInfoPair.second.second}, Variety: ${dogInfoPair.second.third}"
+            if (dogInfoPair.second.first == 1){
+                "Age: ${dogInfoPair.second.first} year, Gender: ${dogInfoPair.second.second}, Variety: ${dogInfoPair.second.third}"
+            }else {
+                "Age: ${dogInfoPair.second.first} years, Gender: ${dogInfoPair.second.second}, Variety: ${dogInfoPair.second.third}"
+            }
     }
 }
