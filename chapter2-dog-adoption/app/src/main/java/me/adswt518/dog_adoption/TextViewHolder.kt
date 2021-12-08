@@ -2,16 +2,17 @@ package me.adswt518.dog_adoption
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class TextViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
-    LayoutInflater.from(parent.context).inflate(R.layout.layout_text, parent, false)
+    LayoutInflater.from(parent.context).inflate(R.layout.layout_dog, parent, false)
 ) {
-    fun update(text: String){
-
-        itemView.findViewById<TextView>(R.id.title).setText(text)
-
+    fun update(dogInfoPair: Pair<Pair<Int, String>, Triple<Int, String, String>>) {
+        itemView.findViewById<ImageView>(R.id.photo).setImageResource(dogInfoPair.first.first)
+        itemView.findViewById<TextView>(R.id.name).text = dogInfoPair.first.second
+        itemView.findViewById<TextView>(R.id.info).text =
+            "Age: ${dogInfoPair.second.first} years, Gender: ${dogInfoPair.second.second}, Variety: ${dogInfoPair.second.third}"
     }
-
 }
