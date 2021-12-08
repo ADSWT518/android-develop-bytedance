@@ -7,7 +7,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TextViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
+class DogRelativeLayoutHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     LayoutInflater.from(parent.context).inflate(R.layout.layout_dog, parent, false)
 ) {
     var dog: RelativeLayout = itemView.findViewById(R.id.dog)

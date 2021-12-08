@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val list = findViewById<RecyclerView>(R.id.list)
-        val adapter = SearchAdapter()
+        val adapter = DogAdapter()
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(this)
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         adapter.updateItems(items)
 
-        adapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
+        adapter.setOnItemClickListener(object : DogAdapter.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 // position here is the index in List "items", so we need to add 1 to it to get the key in dogMap
                 println("click $position item")

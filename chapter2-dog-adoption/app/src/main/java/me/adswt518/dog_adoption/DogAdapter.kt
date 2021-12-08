@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class SearchAdapter : RecyclerView.Adapter<TextViewHolder>() {
+class DogAdapter : RecyclerView.Adapter<DogRelativeLayoutHolder>() {
 
     private val items = arrayListOf<Pair<Pair<Int,String>, Triple<Int, String, String>>>()
     private lateinit var onItemClickListener: OnItemClickListener
@@ -13,11 +13,11 @@ class SearchAdapter : RecyclerView.Adapter<TextViewHolder>() {
         this.onItemClickListener = listener
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextViewHolder {
-        return TextViewHolder(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DogRelativeLayoutHolder {
+        return DogRelativeLayoutHolder(parent)
     }
 
-    override fun onBindViewHolder(holder: TextViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DogRelativeLayoutHolder, position: Int) {
         holder.update(items[position])
         holder.dog.setOnClickListener {
             onItemClickListener.onItemClick(holder.itemView, position)
