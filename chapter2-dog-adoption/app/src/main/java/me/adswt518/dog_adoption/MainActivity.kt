@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -66,6 +68,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
+
+        findViewById<TextView>(R.id.cancel).setOnClickListener {
+            var input = findViewById<EditText>(R.id.input)
+            input.text.clear()
+        }
     }
 
     fun activityIntent(position: Int) {
