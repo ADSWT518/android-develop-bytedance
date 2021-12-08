@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dog"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+    <!-- From https://stackoverflow.com/questions/31940333/ -->
 
     <ImageView
         android:id="@+id/photo"
@@ -23,9 +28,9 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:gravity="center"
-            tools:text="Scooter"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textSize="20sp"/>
+            tools:text="Scooter" />
 
         <TextView
             android:id="@+id/info"

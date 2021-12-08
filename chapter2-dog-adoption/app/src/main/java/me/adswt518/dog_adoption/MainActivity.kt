@@ -1,8 +1,10 @@
 package me.adswt518.dog_adoption
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -11,12 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         val list = findViewById<RecyclerView>(R.id.list)
         val adapter = SearchAdapter()
         list.adapter = adapter
         list.layoutManager = LinearLayoutManager(this)
-
 
         val items = arrayListOf<Pair<Pair<Int, String>, Triple<Int, String, String>>>()
 
@@ -43,6 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         adapter.updateItems(items)
 
+        adapter.setOnItemClickListener(object : SearchAdapter.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                // position here is the index in List "items", so we need to add 1 to it to get the key in dogMap
+                println("click $position item")
+                activityIntent(position + 1)
+            }
+        })
 
         // 监听 SearchBox 发生输入行为
         findViewById<SearchBox>(R.id.search_box).setTextChangedListener(object :
@@ -59,6 +66,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
         )
+    }
 
+    fun activityIntent(position: Int) {
+        val intent = Intent(this, DetailActivity::class.java)
+        intent.putExtra("position", position)
+        startActivity(intent)
     }
 }
