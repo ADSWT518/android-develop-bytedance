@@ -1,6 +1,6 @@
 <resources>
     <!-- Global -->
-    <string name="app_name">todolist</string>
+    <string name="app_name">Todolist</string>
 
     <!-- Main -->
     <string name="action_settings">Settings</string>
