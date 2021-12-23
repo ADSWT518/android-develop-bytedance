@@ -99,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         mFilename = findViewById(R.id.filename)
         mDetailInfo = findViewById(R.id.detailInfo)
         mShowLastImg = findViewById(R.id.album)
-        loadLastImg()
+        loadLastImgOrVideo()
         shutter.setOnTouchListener(OnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> startTime = System.currentTimeMillis()
@@ -123,6 +123,7 @@ class MainActivity : AppCompatActivity() {
                         releaseMediaRecorder()
                         mCamera!!.lock()
                         mIsRecording = false
+                        loadLastImgOrVideo()
                     }
                     return@OnTouchListener false
                 } else {
@@ -296,7 +297,7 @@ class MainActivity : AppCompatActivity() {
                 val fos = FileOutputStream(pictureFile)
                 fos.write(bytes)
                 fos.close()
-                loadLastImg()
+                loadLastImgOrVideo()
             } catch (e: FileNotFoundException) {
                 //error
             } catch (e: IOException) {
@@ -395,7 +396,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadLastImg() {
+    private fun loadLastImgOrVideo() {
 
         val mediaStorageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         if (!mediaStorageDir!!.exists()) {
