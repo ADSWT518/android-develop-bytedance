@@ -1,4 +1,4 @@
-# chapter6-todolist
+# chapter7-image-and-video
 
 ## What I have done
 
